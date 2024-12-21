@@ -303,14 +303,7 @@ System Requirements:
             "buzzheavier": "https://buzzheavier.com/716go6imtzta",
             "megadb": "https://megadb.net/aajy6i7oy9ot",
             "1fichier": "https://1fichier.com/?tjy8f0ybk66ojeur0sv3"
-        },
-        "features": """• Stunning graphics and optimization for PC
-• Full DLC content included
-• Dynamic combat system
-• Open-world exploration
-• Environmental interaction
-• Multiple Spider-Man suits
-• Photo mode"""
+        }
     },
 ]
 
