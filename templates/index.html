@@ -51,9 +51,6 @@
                 <div class="software-card">
                     <div class="software-info">
                         <div class="card">
-                            <div class="downloads-badge">
-                                <i class="fas fa-download"></i> {{ software.downloads }}+ Downloads
-                            </div>
                             {% if software.image_url %}
                             <div class="card-image">
                                 <img src="{{ software.image_url }}" 
@@ -63,7 +60,12 @@
                             </div>
                             {% endif %}
                             <div class="card-content">
-                                <h2>{{ software.name }}</h2>
+                                <div class="card-header">
+                                    <h2>{{ software.name }}</h2>
+                                    <div class="downloads-badge">
+                                        <i class="fas fa-download"></i> {{ software.downloads }}+ Downloads
+                                    </div>
+                                </div>
                                 <div class="meta-info">
                                     <span class="version">Version: {{ software.version }}</span>
                                     <span class="size">Size: {{ software.size }}</span>
@@ -85,6 +87,15 @@
                                     <button class="show-more-btn" onclick="toggleDescription(this)">Show More</button>
                                     {% endif %}
                                 </div>
+                                <div class="download-links">
+                                    {% if software.download_links %}
+                                        {% for platform, url in software.download_links.items() %}
+                                        <a href="{{ url }}" class="download-button" target="_blank">
+                                            <i class="fas fa-download"></i> Download from {{ platform | title }}
+                                        </a>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
                                 {% if software.features %}
                                 <div class="features-container">
                                     <h3>Features:</h3>
@@ -95,31 +106,12 @@
                                     </ul>
                                 </div>
                                 {% endif %}
-                                <div class="card-actions">
-                                    {% if software.virustotal_links %}
-                                    <div class="virustotal-links">
-                                        <a href="{{ software.virustotal_links[0] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 1</a>
-                                        <a href="{{ software.virustotal_links[1] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 2</a>
-                                    </div>
-                                    {% endif %}
-                                    {% if software.download_links %}
-                                        {% if software.download_links.get('1fichier') %}
-                                        <a href="{{ software.download_links.get('1fichier') }}" class="download-btn" target="_blank">
-                                            <i class="fas fa-download"></i> Download (1fichier)
-                                        </a>
-                                        {% endif %}
-                                        {% if software.download_links.get('filecrypt') %}
-                                        <a href="{{ software.download_links.get('filecrypt') }}" class="download-btn filecrypt-btn" target="_blank">
-                                            <i class="fas fa-lock"></i> Download (FileCrypt)
-                                        </a>
-                                        {% endif %}
-                                        {% if software.download_links.get('buzzheavier') %}
-                                        <a href="{{ software.download_links.get('buzzheavier') }}" class="download-btn buzzheavier-btn" target="_blank">
-                                            <i class="fas fa-bolt"></i> Download (Buzzheavier)
-                                        </a>
-                                        {% endif %}
-                                    {% endif %}
+                                {% if software.virustotal_links %}
+                                <div class="virustotal-links">
+                                    <a href="{{ software.virustotal_links[0] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 1</a>
+                                    <a href="{{ software.virustotal_links[1] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 2</a>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
