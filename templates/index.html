@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRIZDOTPC - Download Free Software</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="site-title">
+                <h1>DRIZDOTPC</h1>
+                <p class="subtitle">Download Free Software</p>
+            </div>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search software..." class="search-input">
+                    <button onclick="searchSoftware()" class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">
+                    <i class="fas fa-home"></i> Home</a>
+                </li>
+                <li><a href="{{ url_for('category', category='Software') }}" class="nav-link {% if category == 'Software' %}active{% endif %}">
+                    <i class="fas fa-desktop"></i> Software</a>
+                </li>
+                <li><a href="{{ url_for('category', category='Games') }}" class="nav-link {% if category == 'Games' %}active{% endif %}">
+                    <i class="fas fa-gamepad"></i> Games</a>
+                </li>
+                <li><a href="{{ url_for('category', category='Movies') }}" class="nav-link {% if category == 'Movies' %}active{% endif %}">
+                    <i class="fas fa-film"></i> Movies</a>
+                </li>
+                <li><a href="{{ url_for('category', category='Multimedia') }}" class="nav-link {% if category == 'Multimedia' %}active{% endif %}">
+                    <i class="fas fa-play-circle"></i> Multimedia</a>
+                </li>
+                <li><a href="{{ url_for('category', category='Development') }}" class="nav-link {% if category == 'Development' %}active{% endif %}">
+                    <i class="fas fa-code"></i> Development</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="content">
+            <div class="software-grid">
+                {% for software in software_list %}
+                <div class="software-card">
+                    <div class="software-info">
+                        <div class="card">
+                            <div class="downloads-badge">
+                                <i class="fas fa-download"></i> {{ software.downloads }}+ Downloads
+                            </div>
+                            {% if software.image_url %}
+                            <div class="card-image">
+                                <img src="{{ software.image_url }}" 
+                                     alt="{{ software.name }}" 
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/placeholder.jpg') }}';">
+                            </div>
+                            {% endif %}
+                            <div class="card-content">
+                                <h2>{{ software.name }}</h2>
+                                <div class="meta-info">
+                                    <span class="version">Version: {{ software.version }}</span>
+                                    <span class="size">Size: {{ software.size }}</span>
+                                    <span class="category">Category: {{ software.category }}</span>
+                                </div>
+                                {% if software.genre %}
+                                <div class="genre-tags">
+                                    {% for genre in software.genre %}
+                                    <span class="genre-tag">{{ genre }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                <div class="description-container">
+                                    <div class="description-preview">{{ software.description[:150] }}{% if software.description|length > 150 %}...{% endif %}</div>
+                                    {% if software.description|length > 150 %}
+                                    <div class="description-full" style="display: none;">
+                                        {{ software.description | safe }}
+                                    </div>
+                                    <button class="show-more-btn" onclick="toggleDescription(this)">Show More</button>
+                                    {% endif %}
+                                </div>
+                                {% if software.features %}
+                                <div class="features-container">
+                                    <h3>Features:</h3>
+                                    <ul class="features-list">
+                                        {% for feature in software.features.split('•')[1:] %}
+                                        <li>{{ feature.strip() }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                <div class="card-actions">
+                                    {% if software.virustotal_links %}
+                                    <div class="virustotal-links">
+                                        <a href="{{ software.virustotal_links[0] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 1</a>
+                                        <a href="{{ software.virustotal_links[1] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 2</a>
+                                    </div>
+                                    {% endif %}
+                                    {% if software.download_links %}
+                                        {% if software.download_links.get('1fichier') %}
+                                        <a href="{{ software.download_links.get('1fichier') }}" class="download-btn" target="_blank">
+                                            <i class="fas fa-download"></i> Download (1fichier)
+                                        </a>
+                                        {% endif %}
+                                        {% if software.download_links.get('filecrypt') %}
+                                        <a href="{{ software.download_links.get('filecrypt') }}" class="download-btn filecrypt-btn" target="_blank">
+                                            <i class="fas fa-lock"></i> Download (FileCrypt)
+                                        </a>
+                                        {% endif %}
+                                        {% if software.download_links.get('buzzheavier') %}
+                                        <a href="{{ software.download_links.get('buzzheavier') }}" class="download-btn buzzheavier-btn" target="_blank">
+                                            <i class="fas fa-bolt"></i> Download (Buzzheavier)
+                                        </a>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div id="about-section">
+                <h2>About DRIZDOTPC</h2>
+                <p>Welcome to DRIZDOTPC - your friendly neighborhood software hub! We're passionate about making software accessible to everyone. Our mission is simple: provide hassle-free, direct downloads for all your favorite software.</p>
+                <p>We carefully curate and verify all software to ensure you get the best and safest downloads. Our platform is constantly updated with the latest versions and security patches to keep you protected.</p>
+                <p>Support our mission by making a donation - every contribution helps us maintain and improve our services!</p>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="widget categories">
+                <h2>Categories</h2>
+                <ul>
+                    <li>
+                        <a href="/category/Software">
+                            <i class="fas fa-desktop"></i> Software
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/Games">
+                            <i class="fas fa-gamepad"></i> Games
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/Movies">
+                            <i class="fas fa-film"></i> Movies
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/Multimedia">
+                            <i class="fas fa-play-circle"></i> Multimedia
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/Development">
+                            <i class="fas fa-code"></i> Development
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="widget popular-downloads">
+                <h3>Popular Downloads</h3>
+                <ul>
+                    <li>
+                        <a href="{{ url_for('download', software_id='1') }}">
+                            <i class="fas fa-download"></i>
+                            Video Analyzer
+                            <span class="download-count">1250+ Downloads</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donate Modal -->
+    <div id="donateModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDonateModal()">&times;</span>
+            <h2>Support DRIZDOTPC</h2>
+            <p>Help us keep providing free software downloads! Your donations directly support our server costs and development efforts.</p>
+            <div class="donate-options">
+                <a href="https://www.paypal.com" target="_blank" class="donate-option">
+                    <i class="fab fa-paypal"></i> Support via PayPal
+                </a>
+                <a href="https://www.patreon.com" target="_blank" class="donate-option">
+                    <i class="fab fa-patreon"></i> Become a Patron
+                </a>
+                <div class="crypto-option">
+                    <i class="fab fa-bitcoin"></i> Bitcoin
+                    <div class="crypto-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">DMCA</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://x.com/drizzledawka" target="_blank" class="twitter" title="Follow us on X/Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/@fact4u287" target="_blank" class="youtube" title="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DRIZDOTPC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    function toggleDescription(button) {
+        const container = button.parentElement;
+        const preview = container.querySelector('.description-preview');
+        const full = container.querySelector('.description-full');
+        
+        if (full.style.display === 'none') {
+            preview.style.display = 'none';
+            full.style.display = 'block';
+            button.textContent = 'Show Less';
+        } else {
+            preview.style.display = 'block';
+            full.style.display = 'none';
+            button.textContent = 'Show More';
+        }
+    }
+
+    // Donate Modal
+    function openDonateModal() {
+        document.getElementById('donateModal').style.display = 'block';
+    }
+
+    function closeDonateModal() {
+        document.getElementById('donateModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('donateModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function openImage(src) {
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+        modal.style.display = 'flex';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.zIndex = '1000';
+        modal.onclick = () => document.body.removeChild(modal);
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '90%';
+        img.style.maxHeight = '90%';
+        img.style.objectFit = 'contain';
+        img.style.borderRadius = '8px';
+
+        modal.appendChild(img);
+        document.body.appendChild(modal);
+    }
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
