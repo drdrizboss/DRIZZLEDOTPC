@@ -87,13 +87,39 @@
                                     <button class="show-more-btn" onclick="toggleDescription(this)">Show More</button>
                                     {% endif %}
                                 </div>
-                                <div class="download-links">
+                                <div class="card-actions">
                                     {% if software.download_links %}
-                                        {% for platform, url in software.download_links.items() %}
-                                        <a href="{{ url }}" class="download-button" target="_blank">
-                                            <i class="fas fa-download"></i> Download from {{ platform | title }}
+                                        {% if software.download_links.get('1fichier') %}
+                                        <a href="{{ software.download_links.get('1fichier') }}" class="download-btn" target="_blank">
+                                            <i class="fas fa-download"></i> Download (1fichier)
                                         </a>
-                                        {% endfor %}
+                                        {% endif %}
+                                        {% if software.download_links.get('filecrypt') %}
+                                        <a href="{{ software.download_links.get('filecrypt') }}" class="download-btn filecrypt-btn" target="_blank">
+                                            <i class="fas fa-lock"></i> Download (FileCrypt)
+                                        </a>
+                                        {% endif %}
+                                        {% if software.download_links.get('buzzheavier') %}
+                                        <a href="{{ software.download_links.get('buzzheavier') }}" class="download-btn buzzheavier-btn" target="_blank">
+                                            <i class="fas fa-bolt"></i> Download (Buzzheavier)
+                                        </a>
+                                        {% endif %}
+                                        {% if software.download_links.get('megadb') %}
+                                        <a href="{{ software.download_links.get('megadb') }}" class="download-btn" target="_blank">
+                                            <i class="fas fa-download"></i> Download (MegaDB)
+                                        </a>
+                                        {% endif %}
+                                        {% if software.download_links.get('datanodes') %}
+                                        <a href="{{ software.download_links.get('datanodes') }}" class="download-btn" target="_blank">
+                                            <i class="fas fa-download"></i> Download (Datanodes)
+                                        </a>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if software.virustotal_links %}
+                                    <div class="virustotal-links">
+                                        <a href="{{ software.virustotal_links[0] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 1</a>
+                                        <a href="{{ software.virustotal_links[1] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 2</a>
+                                    </div>
                                     {% endif %}
                                 </div>
                                 {% if software.features %}
@@ -104,12 +130,6 @@
                                         <li>{{ feature.strip() }}</li>
                                         {% endfor %}
                                     </ul>
-                                </div>
-                                {% endif %}
-                                {% if software.virustotal_links %}
-                                <div class="virustotal-links">
-                                    <a href="{{ software.virustotal_links[0] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 1</a>
-                                    <a href="{{ software.virustotal_links[1] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 2</a>
                                 </div>
                                 {% endif %}
                             </div>

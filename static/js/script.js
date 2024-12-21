@@ -42,12 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 
-    searchButton.addEventListener('click', () => {
-        const query = searchInput.value;
-        if (query.length >= 2) {
-            performSearch(query);
-        }
-    });
+    searchButton.addEventListener('click', searchSoftware);
 
     function preventDefaults(e) {
         e.preventDefault();
@@ -126,6 +121,34 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Search error:', error);
         }
+    }
+
+    function searchSoftware() {
+        const query = searchInput.value.trim();
+
+        if (!query) {
+            window.location.href = '/';
+            return;
+        }
+
+        // Show loading state
+        const originalContent = searchButton.innerHTML;
+        searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+        fetch(`/search?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else {
+                    console.error('Search failed:', data.error || 'Unknown error');
+                    searchButton.innerHTML = originalContent;
+                }
+            })
+            .catch(error => {
+                console.error('Search error:', error);
+                searchButton.innerHTML = originalContent;
+            });
     }
 
     // Update software grid with search results
@@ -229,4 +252,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load of files
     loadFiles();
+
+    // Add event listener for search input
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchSoftware();
+        }
+    });
 });

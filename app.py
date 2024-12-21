@@ -323,15 +323,17 @@ def category(category):
 @app.route('/search')
 def search():
     query = request.args.get('q', '').lower()
-    if query:
-        results = [
-            s for s in software_list
-            if query in s['name'].lower() or 
-               query in s.get('description', '').lower() or
-               query in s.get('category', '').lower()
-        ]
-        return jsonify(results)
-    return jsonify([])
+    if not query:
+        return jsonify({'redirect': '/'})
+    matching_software = []
+    for software in software_list:
+        if (query in software['name'].lower() or
+            query in software.get('description', '').lower() or
+            query in software.get('category', '').lower()):
+            matching_software.append(software)
+    return render_template('index.html', 
+                         software_list=matching_software,
+                         search_query=query)
 
 @app.route('/download/<software_id>')
 def download(software_id):

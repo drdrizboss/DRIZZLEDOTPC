@@ -369,20 +369,49 @@ nav ul li a.active {
     margin-top: 20px;
 }
 
-.download-button {
+.download-btn, .virustotal-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #2196f3;
-    color: white;
     padding: 10px 20px;
+    margin: 5px;
     border-radius: 5px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
-.download-button:hover {
-    background: #1976d2;
+.download-btn {
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+    color: white;
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, #02a088, #84b52f);
+    transform: translateY(-2px);
+}
+
+.filecrypt-btn {
+    background: linear-gradient(135deg, #4a90e2, #2c5282);
+}
+
+.filecrypt-btn:hover {
+    background: linear-gradient(135deg, #357abd, #1a365d);
+}
+
+.buzzheavier-btn {
+    background: linear-gradient(135deg, #f2994a, #f2c94c);
+}
+
+.buzzheavier-btn:hover {
+    background: linear-gradient(135deg, #e07c2c, #e0b72c);
+}
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .genre-tags {
