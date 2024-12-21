@@ -322,46 +322,43 @@ def category(category):
 
 @app.route('/search')
 def search():
-    query = request.args.get('query', '').lower()
+    query = request.args.get('q', '').lower()
     if query:
         results = [
             s for s in software_list
-            if query in s['name'].lower() or query in s['description'].lower()
+            if query in s['name'].lower() or 
+               query in s.get('description', '').lower() or
+               query in s.get('category', '').lower()
         ]
         return jsonify(results)
     return jsonify([])
 
 @app.route('/download/<software_id>')
 def download(software_id):
-    # Find the software by ID
     software = next((s for s in software_list if s['id'] == software_id), None)
     
     if software is None:
         return jsonify({'error': 'Software not found'}), 404
     
     # Increment download count
-    if software_id not in download_counts:
-        download_counts[software_id] = software['downloads']
-    download_counts[software_id] += 1
+    download_counts[software_id] = download_counts.get(software_id, 0) + 1
     software['downloads'] = download_counts[software_id]
     
-    # Get the download URL
-    download_links = software.get('download_links')
-    if download_links:
-        if 'filecrypt' in download_links:
-            return redirect(download_links['filecrypt'])
-        elif 'datanodes' in download_links:
-            return redirect(download_links['datanodes'])
-        elif '1fichier' in download_links:
-            return redirect(download_links['1fichier'])
-        elif 'gofile' in download_links:
-            return redirect(download_links['gofile'])
-        elif 'buzzheavier' in download_links:
-            return redirect(download_links['buzzheavier'])
-    elif 'external_url' in software:
+    # Get the download URL based on priority
+    download_links = software.get('download_links', {})
+    
+    # Priority order for download links
+    link_types = ['filecrypt', 'mega', 'gdrive', '1fichier', 'buzzheavier', 'megadb', 'official']
+    
+    for link_type in link_types:
+        if link_type in download_links:
+            return redirect(download_links[link_type])
+    
+    # Fallback to external_url if available
+    if 'external_url' in software:
         return redirect(software['external_url'])
     
-    return jsonify({'error': 'Download URL not available'}), 404
+    return jsonify({'error': 'No download URL available'}), 404
 
 if __name__ == '__main__':
     # Get port from environment variable (Render sets this automatically)

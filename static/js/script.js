@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const query = e.target.value;
             if (query.length >= 2) {
                 performSearch(query);
+            } else {
+                // If search is cleared, show all software
+                window.location.href = '/';
             }
         }, 300);
     });
@@ -117,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function performSearch(query) {
         try {
             const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
+            if (!response.ok) throw new Error('Search failed');
             const results = await response.json();
             updateSoftwareGrid(results);
         } catch (error) {
@@ -129,31 +133,48 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = document.querySelector('.software-grid');
         if (!grid) return;
 
-        if (software.length === 0) {
+        if (!software || software.length === 0) {
             grid.innerHTML = '<div class="no-results">No software found matching your search.</div>';
             return;
         }
 
         grid.innerHTML = software.map(item => `
             <div class="software-card">
-                <div class="software-image">
-                    <img src="/static/images/${item.image}" alt="${item.name}">
-                </div>
                 <div class="software-info">
-                    <h2>${item.name}</h2>
-                    <div class="software-meta">
-                        <span><i class="fas fa-code-branch"></i> ${item.version}</span>
-                        <span><i class="fas fa-download"></i> ${item.size}</span>
-                        <span><i class="fas fa-calendar"></i> ${item.date_added}</span>
-                    </div>
-                    <p class="software-description">${item.description}</p>
-                    <div class="software-actions">
-                        <a href="/download/${item.id}" class="download-button">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                        <button class="info-button">
-                            <i class="fas fa-info-circle"></i> Details
-                        </button>
+                    <div class="card">
+                        <div class="downloads-badge">
+                            <i class="fas fa-download"></i> ${item.downloads}+ Downloads
+                        </div>
+                        ${item.image_url ? `
+                            <div class="card-image">
+                                <img src="${item.image_url}" 
+                                     alt="${item.name}" 
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='/static/img/placeholder.jpg';">
+                            </div>
+                        ` : ''}
+                        <div class="card-content">
+                            <h2>${item.name}</h2>
+                            <div class="meta-info">
+                                <span class="version">Version: ${item.version}</span>
+                                <span class="size">Size: ${item.size}</span>
+                                <span class="category">Category: ${item.category}</span>
+                            </div>
+                            ${item.genre ? `
+                                <div class="genre-tags">
+                                    ${item.genre.map(g => `<span class="genre-tag">${g}</span>`).join('')}
+                                </div>
+                            ` : ''}
+                            <div class="description-container">
+                                <div class="description-preview">${item.description.slice(0, 150)}${item.description.length > 150 ? '...' : ''}</div>
+                                ${item.description.length > 150 ? `
+                                    <div class="description-full" style="display: none;">
+                                        ${item.description}
+                                    </div>
+                                    <button class="show-more-btn" onclick="toggleDescription(this)">Show More</button>
+                                ` : ''}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
