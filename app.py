@@ -21,6 +21,9 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 31536000  # 1 year
 app.config['TEMPLATES_AUTO_RELOAD'] = False
 app.config['COMPRESS_MIMETYPES'] = ['text/html', 'text/css', 'text/javascript', 'application/javascript']
 
+# Secret key for session
+app.secret_key = os.environ.get('SECRET_KEY', 'your-secret-key-here')
+
 # Initialize download counts with realistic numbers
 SAMPLE_SOFTWARE = [
     {
@@ -284,7 +287,7 @@ def home():
 
 @app.route('/category/<category>')
 def category(category):
-    filtered_software = [s for s in software_list if s['category'] == category]
+    filtered_software = [s for s in software_list if s['category'].lower() == category.lower()]
     return render_template('index.html', software_list=filtered_software, category=category)
 
 @app.route('/search')
@@ -332,4 +335,4 @@ def download(software_id):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=False)
