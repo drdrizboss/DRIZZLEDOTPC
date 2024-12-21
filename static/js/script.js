@@ -1,12 +1,54 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Make searchSoftware function globally accessible
+function searchSoftware() {
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const query = searchInput.value.trim();
+    
+    if (!query) {
+        window.location.href = '/';
+        return;
+    }
+    
+    // Show loading state
+    const originalContent = searchButton.innerHTML;
+    searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    
+    // Perform the search
+    window.location.href = `/search?q=${encodeURIComponent(query)}`;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get search elements
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+
+    // Function to perform search
+    function performSearch() {
+        const query = searchInput.value.trim();
+        if (query) {
+            window.location.href = '/search?q=' + encodeURIComponent(query);
+        }
+    }
+
+    // Add event listener for Enter key
+    searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            performSearch();
+        }
+    });
+
+    // Add event listener for search button click
+    searchButton.addEventListener('click', function() {
+        performSearch();
+    });
+
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
     const progressContainer = document.querySelector('.progress-container');
     const progressBar = document.querySelector('.progress');
     const progressText = document.querySelector('.progress-text');
     const filesList = document.getElementById('filesList');
-    const searchInput = document.getElementById('searchInput');
-    const searchButton = document.querySelector('.search-button');
     let searchTimeout;
 
     // Prevent default drag behaviors
@@ -27,22 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle dropped files
     dropZone.addEventListener('drop', handleDrop, false);
     fileInput.addEventListener('change', handleFiles, false);
-
-    // Live search functionality
-    searchInput.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            const query = e.target.value;
-            if (query.length >= 2) {
-                performSearch(query);
-            } else {
-                // If search is cleared, show all software
-                window.location.href = '/';
-            }
-        }, 300);
-    });
-
-    searchButton.addEventListener('click', searchSoftware);
 
     function preventDefaults(e) {
         e.preventDefault();
@@ -109,46 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             })
             .catch(error => console.error('Error loading files:', error));
-    }
-
-    // Handle search
-    async function performSearch(query) {
-        try {
-            const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
-            if (!response.ok) throw new Error('Search failed');
-            const results = await response.json();
-            updateSoftwareGrid(results);
-        } catch (error) {
-            console.error('Search error:', error);
-        }
-    }
-
-    function searchSoftware() {
-        const query = searchInput.value.trim();
-
-        if (!query) {
-            window.location.href = '/';
-            return;
-        }
-
-        // Show loading state
-        const originalContent = searchButton.innerHTML;
-        searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-
-        fetch(`/search?q=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.redirect) {
-                    window.location.href = data.redirect;
-                } else {
-                    console.error('Search failed:', data.error || 'Unknown error');
-                    searchButton.innerHTML = originalContent;
-                }
-            })
-            .catch(error => {
-                console.error('Search error:', error);
-                searchButton.innerHTML = originalContent;
-            });
     }
 
     // Update software grid with search results
@@ -252,11 +238,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load of files
     loadFiles();
-
-    // Add event listener for search input
-    searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            searchSoftware();
-        }
-    });
 });

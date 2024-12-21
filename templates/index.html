@@ -6,6 +6,7 @@
     <title>DRIZDOTPC - Download Free Software</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
     <header>
@@ -17,7 +18,7 @@
             <div class="header-actions">
                 <div class="search-container">
                     <input type="text" id="searchInput" placeholder="Search software..." class="search-input">
-                    <button onclick="searchSoftware()" class="search-button">
+                    <button type="button" id="searchButton" class="search-button">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -47,96 +48,84 @@
     <div class="main-container">
         <div class="content">
             <div class="software-grid">
-                {% for software in software_list %}
-                <div class="software-card">
-                    <div class="software-info">
-                        <div class="card">
-                            {% if software.image_url %}
-                            <div class="card-image">
-                                <img src="{{ software.image_url }}" 
-                                     alt="{{ software.name }}" 
-                                     loading="lazy"
-                                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/placeholder.jpg') }}';">
-                            </div>
-                            {% endif %}
-                            <div class="card-content">
-                                <div class="card-header">
-                                    <h2>{{ software.name }}</h2>
-                                    <div class="downloads-badge">
-                                        <i class="fas fa-download"></i> {{ software.downloads }}+ Downloads
-                                    </div>
-                                </div>
-                                <div class="meta-info">
-                                    <span class="version">Version: {{ software.version }}</span>
-                                    <span class="size">Size: {{ software.size }}</span>
-                                    <span class="category">Category: {{ software.category }}</span>
-                                </div>
-                                {% if software.genre %}
-                                <div class="genre-tags">
-                                    {% for genre in software.genre %}
-                                    <span class="genre-tag">{{ genre }}</span>
-                                    {% endfor %}
+                {% if software_list %}
+                    {% for software in software_list %}
+                    <div class="software-card">
+                        <div class="software-info">
+                            <div class="card">
+                                {% if software.image_url %}
+                                <div class="card-image">
+                                    <img src="{{ software.image_url }}" 
+                                         alt="{{ software.name }}" 
+                                         loading="lazy"
+                                         onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/placeholder.jpg') }}';">
                                 </div>
                                 {% endif %}
-                                <div class="description-container">
-                                    <div class="description-preview">{{ software.description[:150] }}{% if software.description|length > 150 %}...{% endif %}</div>
-                                    {% if software.description|length > 150 %}
-                                    <div class="description-full" style="display: none;">
-                                        {{ software.description | safe }}
+                                <div class="card-content">
+                                    <div class="card-header">
+                                        <h2>{{ software.name }}</h2>
+                                        <div class="downloads-badge">
+                                            <i class="fas fa-download"></i> {{ software.downloads }}+ Downloads
+                                        </div>
                                     </div>
-                                    <button class="show-more-btn" onclick="toggleDescription(this)">Show More</button>
-                                    {% endif %}
-                                </div>
-                                <div class="card-actions">
-                                    {% if software.download_links %}
-                                        {% if software.download_links.get('1fichier') %}
-                                        <a href="{{ software.download_links.get('1fichier') }}" class="download-btn" target="_blank">
-                                            <i class="fas fa-download"></i> Download (1fichier)
-                                        </a>
-                                        {% endif %}
-                                        {% if software.download_links.get('filecrypt') %}
-                                        <a href="{{ software.download_links.get('filecrypt') }}" class="download-btn filecrypt-btn" target="_blank">
-                                            <i class="fas fa-lock"></i> Download (FileCrypt)
-                                        </a>
-                                        {% endif %}
-                                        {% if software.download_links.get('buzzheavier') %}
-                                        <a href="{{ software.download_links.get('buzzheavier') }}" class="download-btn buzzheavier-btn" target="_blank">
-                                            <i class="fas fa-bolt"></i> Download (Buzzheavier)
-                                        </a>
-                                        {% endif %}
-                                        {% if software.download_links.get('megadb') %}
-                                        <a href="{{ software.download_links.get('megadb') }}" class="download-btn" target="_blank">
-                                            <i class="fas fa-download"></i> Download (MegaDB)
-                                        </a>
-                                        {% endif %}
-                                        {% if software.download_links.get('datanodes') %}
-                                        <a href="{{ software.download_links.get('datanodes') }}" class="download-btn" target="_blank">
-                                            <i class="fas fa-download"></i> Download (Datanodes)
-                                        </a>
-                                        {% endif %}
-                                    {% endif %}
-                                    {% if software.virustotal_links %}
-                                    <div class="virustotal-links">
-                                        <a href="{{ software.virustotal_links[0] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 1</a>
-                                        <a href="{{ software.virustotal_links[1] }}" target="_blank" class="virustotal-btn">VirusTotal Scan 2</a>
+                                    <div class="meta-info">
+                                        <span class="version">Version: {{ software.version }}</span>
+                                        <span class="size">Size: {{ software.size }}</span>
+                                        <span class="category">Category: {{ software.category }}</span>
                                     </div>
-                                    {% endif %}
-                                </div>
-                                {% if software.features %}
-                                <div class="features-container">
-                                    <h3>Features:</h3>
-                                    <ul class="features-list">
-                                        {% for feature in software.features.split('•')[1:] %}
-                                        <li>{{ feature.strip() }}</li>
+                                    {% if software.genre %}
+                                    <div class="genre-tags">
+                                        {% for genre in software.genre %}
+                                        <span class="genre-tag">{{ genre }}</span>
                                         {% endfor %}
-                                    </ul>
+                                    </div>
+                                    {% endif %}
+                                    <div class="description-container">
+                                        <div class="description-preview">{{ software.description[:150] }}{% if software.description|length > 150 %}...{% endif %}</div>
+                                        {% if software.description|length > 150 %}
+                                        <div class="description-full" style="display: none;">
+                                            {{ software.description | safe }}
+                                        </div>
+                                        <button class="show-more-btn" onclick="toggleDescription(this)">Show More</button>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-actions">
+                                        {% if software.download_links %}
+                                            {% for platform, url in software.download_links.items() %}
+                                                <a href="{{ url }}" class="download-btn" target="_blank">
+                                                    <i class="fas fa-download"></i> Download ({{ platform | title }})
+                                                </a>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if software.external_url %}
+                                        <a href="{{ software.external_url }}" class="download-btn alternate" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i> Alternative Download
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    {% if software.features %}
+                                    <div class="features-container">
+                                        <h3>Features:</h3>
+                                        <ul class="features-list">
+                                            {% for feature in software.features.split('•')[1:] %}
+                                            <li>{{ feature.strip() }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    {% endif %}
                                 </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <div class="no-results">
+                        {% if search_query %}
+                            <h2>No results found for "{{ search_query }}"</h2>
+                            <p>Try different keywords or browse our categories</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
             </div>
 
             <div id="about-section">
@@ -293,6 +282,5 @@
         document.body.appendChild(modal);
     }
     </script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

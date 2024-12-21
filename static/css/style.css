@@ -1186,3 +1186,21 @@ h1 {
     color: #2980b9;
     text-decoration: underline;
 }
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.no-results h2 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.no-results p {
+    color: #aaa;
+}

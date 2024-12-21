@@ -1,0 +1,83 @@
+[
+    {
+        "id": "ready-or-not",
+        "name": "Ready or Not Free Download",
+        "version": "v15394684",
+        "size": "85 GB",
+        "category": "Games",
+        "genre": [
+            "Action",
+            "Simulation",
+            "Tactical"
+        ],
+        "downloads": "500K",
+        "description": "Ready or Not is an intense, tactical, first-person shooter that depicts a modern-day world in which SWAT police units are called to defuse hostile and confronting situations.",
+        "image_url": "/static/images/ready-or-not.jpg",
+        "download_links": [
+            {"name": "Filecrypt", "url": "https://filecrypt.co/Container/Ready-or-Not.html"},
+            {"name": "1fichier", "url": "https://1fichier.com/?Ready-or-Not"},
+            {"name": "Torrent", "url": "magnet:?xt=urn:btih:Ready-or-Not"}
+        ]
+    },
+    {
+        "id": "buckshot-roulette",
+        "name": "Buckshot Roulette Free Download",
+        "version": "v2.1.0",
+        "size": "2 GB",
+        "category": "Games",
+        "genre": [
+            "Horror",
+            "Indie"
+        ],
+        "downloads": "100K",
+        "description": "A tense game of shotgun shell roulette against a mysterious dealer.",
+        "image_url": "/static/images/buckshot-roulette.jpg",
+        "download_links": [
+            {"name": "Filecrypt", "url": "https://filecrypt.co/Container/Buckshot-Roulette.html"},
+            {"name": "1fichier", "url": "https://1fichier.com/?Buckshot-Roulette"},
+            {"name": "Torrent", "url": "magnet:?xt=urn:btih:Buckshot-Roulette"}
+        ]
+    },
+    {
+        "id": "ghost-of-tsushima",
+        "name": "Ghost Of Tsushima DIRECTOR'S CUT Free Download",
+        "version": "v1053.7.0809.1937",
+        "size": "95 GB",
+        "category": "Games",
+        "genre": [
+            "Action",
+            "Adventure",
+            "Open World"
+        ],
+        "downloads": "750K",
+        "description": "Forge a new path and wage an unconventional war for the freedom of Tsushima in this expanded version of the open-world action-adventure from Sucker Punch Productions.",
+        "image_url": "/static/images/ghost-of-tsushima.jpg",
+        "download_links": [
+            {"name": "Filecrypt", "url": "https://filecrypt.co/Container/Ghost-of-Tsushima.html"},
+            {"name": "1fichier", "url": "https://1fichier.com/?Ghost-of-Tsushima"},
+            {"name": "Torrent", "url": "magnet:?xt=urn:btih:Ghost-of-Tsushima"}
+        ]
+    },
+    {
+        "id": "gta-v",
+        "name": "GTA V Free Download",
+        "version": "Latest",
+        "size": "115 GB",
+        "category": "Games",
+        "genre": [
+            "Action",
+            "Adventure",
+            "Open World"
+        ],
+        "downloads": "1M",
+        "description": "When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.",
+        "image_url": "/static/images/gtav.jpg",
+        "download_links": [
+            {"name": "Filecrypt", "url": "https://filecrypt.co/Container/8F08E2DB76"},
+            {"name": "Buzzheavier", "url": "https://buzzheavier.com/ouvyovqmuez0"},
+            {"name": "1fichier", "url": "https://1fichier.com/?jib8azgwcb1th6crvahv"},
+            {"name": "DataNodes", "url": "https://datanodes.to/iuge1qo67xmr/GTA-V-SteamRIP.com.rar"},
+            {"name": "Torrent", "url": "https://megadb.net/q0qfl46ce8tx"}
+        ]
+    }
+]
