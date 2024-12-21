@@ -314,10 +314,9 @@ System Requirements:
     },
 ]
 
-software_list = SAMPLE_SOFTWARE
-
-# Create a dictionary to store software downloads
-download_counts = {}
+# Initialize the software list and download counts
+software_list = SAMPLE_SOFTWARE.copy()
+download_counts = {s['id']: s['downloads'] for s in software_list}
 
 @app.route('/')
 def home():
