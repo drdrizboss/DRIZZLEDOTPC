@@ -27,27 +27,34 @@ app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24))
 # Initialize download counts with realistic numbers
 SAMPLE_SOFTWARE = [
     {
-        "id": "1",
+        "id": "windows-11-22h2",
         "name": "Windows 11 22H2",
-        "category": "Software",
         "version": "22H2 16-in-1",
         "size": "5.28 GB",
-        "date_added": "2024-12-20",
-        "download_url": "https://1fichier.com/?uo4m6rvfxx0okyw8l5ki",
+        "category": "Software",
+        "description": "Windows 11 22H2 16-in-1 Edition with latest updates. Features include: • Multiple editions in one package (Pro, Home, Enterprise) • Latest security updates and patches included • Modern interface with enhanced productivity features • DirectStorage and Auto HDR for gaming • Android app support through Amazon Appstore • Improved touch, pen, and voice inputs • Enhanced snap layouts and snap groups",
         "downloads": random.randint(2000, 4000),
-        "description": """Windows 11 22H2 16-in-1 Edition with latest updates. Features include:
-
-• Multiple editions in one package (Pro, Home, Enterprise)
-• Latest security updates and patches included
-• Modern interface with enhanced productivity features
-• DirectStorage and Auto HDR for gaming
-• Android app support through Amazon Appstore
-• Improved touch, pen, and voice inputs
-• Enhanced snap layouts and snap groups""",
-        "external_url": "https://mega.nz/file/zhMhQLTA#I8M0ir9CZJQMAjvqHB2p5mXO9J5ocOnz1Y38NEVV274",
+        "image_url": "https://cdn.windowsreport.com/wp-content/uploads/2021/06/windows-11-2.jpg",
+        "download_links": {
+            "mega": "https://mega.nz/file/example-link-1",
+            "gdrive": "https://drive.google.com/file/example-link-2"
+        }
     },
     {
-        "id": "2",
+        "id": "visual-studio-2022",
+        "name": "Visual Studio 2022 Community",
+        "version": "17.8.3",
+        "size": "2.5 GB",
+        "category": "Development",
+        "description": "Visual Studio 2022 Community Edition - The latest IDE from Microsoft. Features include: • Full-featured IDE for C++, C#, Python, and more • Built-in Git integration • IntelliSense code completion • Live Share for real-time collaboration • Cross-platform development support",
+        "downloads": 1205,
+        "image_url": "https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg",
+        "download_links": {
+            "official": "https://visualstudio.microsoft.com/thank-you-downloading-visual-studio"
+        }
+    },
+    {
+        "id": "adobe-photoshop",
         "name": "Adobe Photoshop",
         "category": "Software",
         "version": "2024",
@@ -68,7 +75,7 @@ SAMPLE_SOFTWARE = [
         "downloads": random.randint(1000, 3000),
     },
     {
-        "id": "3",
+        "id": "windows-10-pro",
         "name": "Windows 10 Pro",
         "category": "Software",
         "version": "1709 (Build 16299.98)",
@@ -80,7 +87,7 @@ SAMPLE_SOFTWARE = [
         "downloads": random.randint(1500, 3500),
     },
     {
-        "id": "4",
+        "id": "windows-11-dev-build",
         "name": "Windows 11 Dev Build",
         "category": "Software",
         "version": "21996.1",
@@ -91,7 +98,7 @@ SAMPLE_SOFTWARE = [
         "downloads": random.randint(1000, 3000),
     },
     {
-        "id": "5",
+        "id": "avg-antivirus-free",
         "name": "AVG Antivirus Free",
         "category": "Software",
         "version": "2024",
@@ -102,7 +109,7 @@ SAMPLE_SOFTWARE = [
         "downloads": random.randint(2000, 4000),
     },
     {
-        "id": "6",
+        "id": "video-analyzer",
         "name": "Video Analyzer",
         "category": "Software",
         "version": "1.0",
@@ -113,7 +120,7 @@ SAMPLE_SOFTWARE = [
         "downloads": random.randint(500, 1500),
     },
     {
-        "id": "7",
+        "id": "dying-light-2-stay-human",
         "name": "Dying Light 2 Stay Human",
         "category": "Games",
         "version": "v1.19.0",
@@ -148,7 +155,7 @@ System Requirements:
         }
     },
     {
-        "id": "8",
+        "id": "elden-ring",
         "name": "Elden Ring",
         "category": "Games",
         "version": "Latest Version + DLC",
@@ -189,7 +196,7 @@ System Requirements:
         }
     },
     {
-        "id": "9",
+        "id": "red-dead-redemption-2",
         "name": "Red Dead Redemption 2",
         "category": "Games",
         "version": "Latest Version + Steam Pre-Installed",
@@ -230,7 +237,7 @@ System Requirements:
         }
     },
     {
-        "id": "10",
+        "id": "cyberpunk-2077",
         "name": "Cyberpunk 2077",
         "category": "Games",
         "version": "v2.2 + Phantom Liberty",
@@ -273,7 +280,38 @@ System Requirements:
             "buzzheavier": "https://buzzheavier.com/sdiw114yxgkz",
             "1fichier": "https://1fichier.com/?u3czwon2p536woe1nppl"
         }
-    }
+    },
+    {
+        "id": "spiderman-remastered",
+        "name": "Marvel's Spider-Man Remastered",
+        "version": "Latest Version",
+        "size": "75 GB",
+        "category": "Games",
+        "description": """Marvel's Spider-Man Remastered for PC brings an experienced Peter Parker fighting crime and iconic villains in Marvel's New York. Key features include:
+
+• Be Greater: When iconic Marvel villains threaten Marvel's New York, Peter Parker and Spider-Man's worlds collide.
+• Feel like Spider-Man: Experience improvisational combat, dynamic acrobatics, fluid urban traversal, and environmental interactions.
+• Worlds Collide: Original action-packed story with reimagined iconic characters from Peter and Spider-Man's lives.
+• Marvel's New York: Swing through vibrant neighborhoods, catch breathtaking views of Manhattan landmarks, and use the environment for epic takedowns.
+• Complete Content: Includes The City That Never Sleeps DLC with additional missions and challenges.""",
+        "genre": ["Action", "Adventure", "Open World"],
+        "developer": "Insomniac Games",
+        "downloads": "1850",
+        "image_url": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg",
+        "download_links": {
+            "filecrypt": "https://filecrypt.co/Container/E6F526A6CF",
+            "buzzheavier": "https://buzzheavier.com/716go6imtzta",
+            "megadb": "https://megadb.net/aajy6i7oy9ot",
+            "1fichier": "https://1fichier.com/?tjy8f0ybk66ojeur0sv3"
+        },
+        "features": """• Stunning graphics and optimization for PC
+• Full DLC content included
+• Dynamic combat system
+• Open-world exploration
+• Environmental interaction
+• Multiple Spider-Man suits
+• Photo mode"""
+    },
 ]
 
 software_list = SAMPLE_SOFTWARE
