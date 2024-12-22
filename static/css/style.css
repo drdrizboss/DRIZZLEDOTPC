@@ -312,17 +312,70 @@ nav ul li a.active {
 }
 
 .card-image {
+    position: relative;
     width: 100%;
     height: 200px;
     overflow: hidden;
-    position: relative;
+    border-radius: 8px 8px 0 0;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
+}
+
+.card-image img:hover {
+    transform: scale(1.05);
+}
+
+.card-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 100%);
+    z-index: 1;
+}
+
+.card-image.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #2a2a2a, #3a3a3a);
+}
+
+.card-image.no-image::after {
+    content: '\f03e';
+    font-family: 'Font Awesome 5 Free';
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.card-image.loading {
+    animation: imagePulse 1.5s infinite;
+}
+
+@keyframes imagePulse {
+    0% { background-color: rgba(0, 0, 0, 0.1); }
+    50% { background-color: rgba(0, 0, 0, 0.2); }
+    100% { background-color: rgba(0, 0, 0, 0.1); }
+}
+
+.card-image.error {
+    background: linear-gradient(45deg, #2a2a2a, #3a3a3a);
+}
+
+.card-image.error::after {
+    content: '\f1c5';
+    font-family: 'Font Awesome 5 Free';
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.2);
 }
 
 .card-content {
@@ -1203,4 +1256,155 @@ h1 {
 
 .no-results p {
     color: #aaa;
+}
+
+/* Search Results Styles */
+.search-results-header {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.search-results-header h2 {
+    color: #fff;
+    margin: 0 0 5px 0;
+    font-size: 1.4em;
+}
+
+.search-results-header p {
+    color: #aaa;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.error-message {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.error-message h2 {
+    color: #ff4444;
+    margin: 0 0 10px 0;
+}
+
+.error-message p {
+    color: #ccc;
+    margin: 0;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.loading:after {
+    content: '...';
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60% { content: '...'; }
+    80% { content: '....'; }
+    100% { content: '.....'; }
+}
+
+/* Search Input Improvements */
+.search-form {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.search-input {
+    flex: 1;
+    padding-right: 40px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.2);
+}
+
+.search-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    color: #34d399;
+}
+
+.search-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.search-status {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 5px 10px;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    z-index: 1000;
+    display: none;
+}
+
+.search-status.error {
+    background: rgba(255, 68, 68, 0.9);
+    color: #fff;
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.loading::after {
+    content: '...';
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+@media (max-width: 768px) {
+    .card-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-image {
+        height: 160px;
+    }
 }

@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/search.js') }}" defer></script>
+
+    <!-- Advertisement Script -->
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '010765ce653e222c4dfc053535ffcd48',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/010765ce653e222c4dfc053535ffcd48/invoke.js"></script>
 </head>
 <body>
     <header>
@@ -66,20 +78,6 @@
 
     <div class="main-container">
         <div class="content">
-            <!-- First Ad Placement -->
-            <div style="text-align: center; margin: 20px 0;">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : '010765ce653e222c4dfc053535ffcd48',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/010765ce653e222c4dfc053535ffcd48/invoke.js"></script>
-            </div>
-
             <div class="software-grid">
                 {% if error %}
                     <div class="error-message">
@@ -136,13 +134,6 @@
                                         {% endif %}
                                     </div>
                                     <div class="card-actions">
-                                        {% if software.id == 'gta-v' %}
-                                            <!-- Advertisement for GTA V -->
-                                            <div style="text-align: center; margin: 20px 0;">
-                                                <script async="async" data-cfasync="false" src="//pl25353045.profitablecpmrate.com/05b43a4d1e0b1f7771a2579becda014a/invoke.js"></script>
-                                                <div id="container-05b43a4d1e0b1f7771a2579becda014a"></div>
-                                            </div>
-                                        {% endif %}
                                         {% if software.download_links %}
                                             {% for platform, url in software.download_links.items() %}
                                                 <a href="{{ url }}" class="download-btn" target="_blank">
@@ -181,24 +172,9 @@
                 {% endif %}
             </div>
 
-            <!-- New Advertisement -->
-            <div style="text-align: center; margin: 20px 0;">
-                <script async="async" data-cfasync="false" src="//pl25353045.profitablecpmrate.com/05b43a4d1e0b1f7771a2579becda014a/invoke.js"></script>
-                <div id="container-05b43a4d1e0b1f7771a2579becda014a"></div>
-            </div>
-
-            <!-- Second Ad Placement -->
-            <div style="text-align: center; margin: 20px 0;">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : '010765ce653e222c4dfc053535ffcd48',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/010765ce653e222c4dfc053535ffcd48/invoke.js"></script>
+            <!-- Advertisement Container -->
+            <div style="text-align: center; margin: 20px auto; max-width: 300px;">
+                <div id="ad-container"></div>
             </div>
 
             <div id="about-section">
@@ -218,20 +194,6 @@
                     <li><a href="{{ url_for('category', category='Movies') }}"><i class="fas fa-film"></i> Movies</a></li>
                     <li><a href="{{ url_for('category', category='Development') }}"><i class="fas fa-code"></i> Development</a></li>
                 </ul>
-            </div>
-
-            <!-- Third Ad Placement -->
-            <div class="widget" style="margin: 20px 0;">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : '010765ce653e222c4dfc053535ffcd48',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/010765ce653e222c4dfc053535ffcd48/invoke.js"></script>
             </div>
         </div>
     </div>

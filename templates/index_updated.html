@@ -136,13 +136,6 @@
                                         {% endif %}
                                     </div>
                                     <div class="card-actions">
-                                        {% if software.id == 'gta-v' %}
-                                            <!-- Advertisement for GTA V -->
-                                            <div style="text-align: center; margin: 20px 0;">
-                                                <script async="async" data-cfasync="false" src="//pl25353045.profitablecpmrate.com/05b43a4d1e0b1f7771a2579becda014a/invoke.js"></script>
-                                                <div id="container-05b43a4d1e0b1f7771a2579becda014a"></div>
-                                            </div>
-                                        {% endif %}
                                         {% if software.download_links %}
                                             {% for platform, url in software.download_links.items() %}
                                                 <a href="{{ url }}" class="download-btn" target="_blank">

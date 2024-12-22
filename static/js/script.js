@@ -159,7 +159,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <img src="${item.image_url}" 
                                      alt="${item.name}" 
                                      loading="lazy"
-                                     onerror="this.onerror=null; this.src='/static/img/placeholder.jpg';">
+                                     onerror="handleImageError(this)"
+                                     data-fallback="/static/img/placeholder.jpg">
                             </div>
                         ` : ''}
                         <div class="card-content">
@@ -189,6 +190,30 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `).join('');
     }
+
+    // Image handling
+    function handleImageError(img) {
+        const container = img.parentElement;
+        
+        // Try fallback image first
+        if (img.dataset.fallback && img.src !== img.dataset.fallback) {
+            img.src = img.dataset.fallback;
+            return;
+        }
+
+        // If fallback fails, show error state
+        container.classList.add('error');
+        container.classList.remove('loading');
+        img.style.display = 'none';
+    }
+
+    // Add loading class to all image containers
+    const imageContainers = document.querySelectorAll('.card-image');
+    imageContainers.forEach(container => {
+        if (container.querySelector('img')) {
+            container.classList.add('loading');
+        }
+    });
 
     // Info button click handler
     document.addEventListener('click', (e) => {

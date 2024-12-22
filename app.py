@@ -50,28 +50,93 @@ def category(category):
     return render_template('index.html', software_list=filtered_software, category=category)
 
 @app.route('/search')
+@cache.cached(timeout=60, query_string=True)  # Cache results for 60 seconds
 def search():
-    query = request.args.get('q', '').lower().strip()
-    if not query:
-        return redirect('/')
+    try:
+        # Get search parameters
+        query = request.args.get('q', '').lower().strip()
+        if not query:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({
+                    'status': 'error',
+                    'message': 'Please enter a search term'
+                }), 400
+            return redirect('/')
 
-    # Search in software list
-    matching_software = []
-    for software in software_list:
-        # Search in name, description, category, and genre
-        searchable_text = ' '.join([
-            software['name'].lower(),
-            software.get('description', '').lower(),
-            software.get('category', '').lower(),
-            ' '.join(str(x).lower() for x in software.get('genre', []))
-        ])
+        if len(query) < 2:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({
+                    'status': 'error',
+                    'message': 'Please enter at least 2 characters'
+                }), 400
+            return render_template('index.html', error="Please enter at least 2 characters")
+
+        # Search logic
+        results = []
+        for software in software_list:
+            try:
+                # Create searchable text from all relevant fields
+                searchable_fields = [
+                    software.get('name', '').lower(),
+                    software.get('description', '').lower(),
+                    software.get('category', '').lower(),
+                    *[genre.lower() for genre in software.get('genre', [])],
+                    software.get('version', '').lower(),
+                    software.get('developer', '').lower()
+                ]
+                
+                # Check if query matches any field
+                if any(query in field for field in searchable_fields if field):
+                    results.append(software)
+                    continue
+
+                # Check for exact matches in tags or keywords
+                if any(query == tag.lower() for tag in software.get('genre', [])):
+                    results.append(software)
+                    continue
+
+            except (AttributeError, TypeError) as e:
+                app.logger.error(f"Error processing software entry: {e}")
+                continue
+
+        # Sort results by relevance (exact matches first, then partial matches)
+        results.sort(key=lambda x: (
+            query == x.get('name', '').lower(),  # Exact name matches first
+            query in x.get('name', '').lower(),  # Partial name matches second
+            query in x.get('category', '').lower(),  # Category matches third
+            x.get('downloads', 0)  # Then by download count
+        ), reverse=True)
+
+        response_data = {
+            'status': 'success',
+            'results': results,
+            'count': len(results)
+        }
+
+        # Return JSON response for AJAX requests
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return jsonify(response_data)
         
-        if query in searchable_text:
-            matching_software.append(software)
+        # Return template for regular requests
+        return render_template('index.html', 
+                             software_list=results, 
+                             search_query=query,
+                             result_count=len(results))
 
-    return render_template('index.html', 
-                         software_list=matching_software,
-                         search_query=query)
+    except Exception as e:
+        app.logger.error(f"Search error: {e}")
+        error_response = {
+            'status': 'error',
+            'message': 'An error occurred while searching',
+            'error': str(e)
+        }
+        
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return jsonify(error_response), 500
+        
+        return render_template('index.html', 
+                             error="An error occurred while searching. Please try again.",
+                             search_query=query)
 
 @app.route('/download/<software_id>')
 def download(software_id):

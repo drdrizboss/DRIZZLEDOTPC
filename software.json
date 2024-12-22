@@ -1,5 +1,69 @@
 [
     {
+        "id": "gta-v",
+        "name": "Grand Theft Auto V",
+        "version": "v1.67",
+        "size": "115 GB",
+        "category": "Games",
+        "description": "Grand Theft Auto V for PC offers players the option to explore the award-winning world of Los Santos and Blaine County in resolutions up to 4K and beyond, as well as the chance to experience the game running at 60 frames per second.\n\nKey Features:\n• Full HD and 4K resolution support\n• First Person Mode\n• Enhanced graphics and draw distances\n• Denser traffic and improved weather effects\n• Expanded wildlife\n• New weapons, vehicles, and activities\n• New radio stations and over 100 additional new songs",
+        "downloads": 5678,
+        "image_url": "https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1364906194.jpg",
+        "system_requirements": {
+            "os": "Windows 10 64 Bit, Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit Service Pack 1",
+            "processor": "Intel Core i5 3470 @ 3.2GHz (4 CPUs) / AMD X8 FX-8350 @ 4GHz (8 CPUs)",
+            "memory": "8 GB RAM",
+            "graphics": "NVIDIA GTX 660 2GB / AMD HD 7870 2GB",
+            "storage": "115 GB available space"
+        },
+        "download_links": {
+            "download": "https://www.profitablecpmrate.com/wq6gr1ji?key=c6e0cee97b0c77dbee38ea10b576ad00",
+            "1fichier": "https://1fichier.com/?jib8azgwcb1th6crvahv",
+            "filecrypt": "https://filecrypt.co/Container/8F08E2DB76"
+        }
+    },
+    {
+        "id": "the-last-of-us-part-1",
+        "name": "The Last of Us Part I",
+        "version": "v1.1.3.0",
+        "size": "78.9 GB",
+        "category": "Games",
+        "description": "Experience the emotional storytelling and unforgettable characters in The Last of Us, winner of over 200 Game of the Year awards. In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.\n\nKey Features:\n• True 4K resolution support\n• Ultra-Wide Monitor Support (21:9 and 32:9)\n• AMD FSR 2 technology for enhanced framerates\n• DualSense and DualShock 4 controller support\n• Full keyboard and mouse support with customization\n• Comprehensive accessibility features\n• 3D audio support for immersive experience",
+        "downloads": 0,
+        "image_url": "https://steamrip.com/wp-content/uploads/2023/03/the-last-of-us-part-I-preinstalled-steamrip.jpg",
+        "system_requirements": {
+            "os": "Windows 10 (Version 1909 or Newer)",
+            "processor": "AMD Ryzen 5 1500X, Intel Core i7-4770K",
+            "memory": "16 GB RAM",
+            "graphics": "AMD Radeon RX 470 (4 GB), AMD Radeon RX 6500 XT (4 GB), NVIDIA GeForce GTX 970 (4 GB), NVIDIA GeForce GTX 1050 Ti (4 GB)",
+            "storage": "100 GB available space"
+        },
+        "download_links": {
+            "filecrypt": "https://filecrypt.co/Container/3FE0641A27",
+            "buzzheavier": "https://buzzheavier.com/f/GJtQ0p6t4AA="
+        }
+    },
+    {
+        "id": "the-sims-4",
+        "name": "The Sims 4",
+        "version": "v1.110.311.1020",
+        "size": "62.4 GB",
+        "category": "Games",
+        "description": "Create Your Own World in The Sims 4! Design unique Sims with distinct personalities and appearances, build dream homes with countless customization options, and experience life your way. Features include:\n• Design your Sims with unique personalities and appearances\n• Build your dream homes with extensive customization options\n• Explore neighborhoods and discover hidden gems\n• Develop relationships and build friendships or rivalries\n• Choose from various careers and watch your Sims progress\n• Includes all DLCs and expansion packs up to v1.110.311.1020",
+        "downloads": 0,
+        "image_url": "https://steamrip.com/wp-content/uploads/2021/06/the-sims-4-free-download-preinstalled-steamrip.jpg",
+        "system_requirements": {
+            "os": "Windows 7 (SP1), Windows 8, Windows 8.1, or Windows 10 (64-bit required)",
+            "processor": "1.8 GHz Intel Core 2 Duo, AMD Athlon 64 Dual-Core 4000+ or equivalent",
+            "memory": "4 GB RAM",
+            "graphics": "128 MB of Video RAM",
+            "storage": "48 GB available space"
+        },
+        "download_links": {
+            "filecrypt": "https://www.filecrypt.cc/Container/767A626D81",
+            "datanodes": "https://datanodes.to/7l4sdgce37a9/Da-Sims-four-SteamRIP.com.rar"
+        }
+    },
+    {
         "id": "windows-11-pro-office-2021",
         "name": "Windows 11 Pro + Office 2021",
         "version": "March 2023",
@@ -216,5 +280,21 @@
             "torrent": "https://megadb.net/va2fox6dk4qd"
         }
     },
-    { "id": "gta-v", "name": "Grand Theft Auto V", "category": "Games", "version": "Latest Version", "size": "Unknown", "date_added": "2024-12-20", "description": "When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.", "genre": ["Action", "Adventure", "Open World"], "image_url": "https://via.placeholder.com/150", "download_links": { "gofile": "https://filecrypt.co/Container/8F08E2DB76", "buzzheavier": "https://buzzheavier.com/ouvyovqmuez0", "1fichier": "https://1fichier.com/?jib8azgwcb1th6crvahv", "datanodes": "https://datanodes.to/iuge1qo67xmr/GTA-V-SteamRIP.com.rar", "megadb": "https://megadb.net/q0qfl46ce8tx" } }
+    {
+        "id": "alan-wake-2",
+        "name": "Alan Wake 2",
+        "category": "Games",
+        "version": "Latest Version",
+        "size": "85 GB",
+        "date_added": "2024-12-21",
+        "description": "Alan Wake, a lost writer trapped in a nightmare beyond our world, writes a dark story in an attempt to shape the reality around him and escape his prison. With a dark horror hunting him, Wake is trying to retain his sanity and beat the devil at his own game. Anderson and Wake are two heroes on two desperate journeys in two separate realities, connected at heart in ways neither of them can understand: reflecting each other, echoing each other, and affecting the worlds around them.\n\nFueled by the horror story, supernatural darkness invades Bright Falls, corrupting the locals and threatening the loved ones of both Anderson and Wake. Light is their weapon—and their safe haven — against the darkness they face. Trapped in a sinister horror story where there are only victims and monsters, can they break out to be the heroes they need to be?\n\nKey Features:\n• Solve a Deadly Mystery: What begins as a small-town murder investigation rapidly spirals into a nightmare journey. Uncover the source of the supernatural darkness in this psychological horror story filled with intense suspense and unexpected twists.\n• Play As Two Characters: Experience both Alan Wake's and Saga Anderson's stories and see events unfold from different perspectives. Switch between Anderson's life-or-death race to solve the case and Wake's desperate attempts to rewrite his reality to escape the depths of the Dark Place.\n• Explore Two Worlds: Experience two beautiful yet terrifying worlds, each with its own rich cast of characters and deadly threats. Discover majestic landscapes of Cauldron Lake in the Pacific Northwest and the idyllic towns of Bright Falls and Watery. Contrasting sharply, attempt to escape the nightmarish cityscape of the Dark Place.\n• Survive With Light: With limited resources, take on powerful supernatural enemies in desperate close-combat situations. It takes more than just a gun to survive: light is the ultimate weapon in the fight against the darkness and will be your refuge when enemies threaten to overwhelm you.\n• DLC Included: Game comes with all additional downloadable content.",
+        "downloads": 0,
+        "image_url": "https://cdn.cloudflare.steamstatic.com/steam/apps/1419630/header.jpg",
+        "genre": ["Horror", "Action", "Adventure", "Psychological Thriller"],
+        "developer": "Remedy Entertainment",
+        "download_links": {
+            "gofile": "https://gofile.io/d/3nzKtv",
+            "buzzheavier": "https://buzzheavier.com/xy2sm8ez5ult"
+        }
+    }
 ]
